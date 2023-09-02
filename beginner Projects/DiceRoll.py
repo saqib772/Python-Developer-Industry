@@ -1,23 +1,31 @@
-#importing module for random number generation
 import random
 
-#range of the values of a dice
 min_val = 1
 max_val = 6
 
-#to loop the rolling through user input
 roll_again = "yes"
 
-#loop
-while roll_again == "yes" or roll_again == "y":
+while roll_again.lower() == "yes" or roll_again.lower() == "y":
     print("Rolling The Dices...")
-    print("The Values are :")
+    computer_roll = random.randint(min_val, max_val)
+    print("The Computer's Roll: ", computer_roll)
     
-    #generating and printing 1st random integer from 1 to 6
-    print(random.randint(min_val, max_val))
+    # Ask the human player to input their choice of dice number
+    human_roll = input("Your Turn! Enter a number from 1 to 6: ")
     
-    #generating and printing 2nd random integer from 1 to 6
-    print(random.randint(min_val, max_val))
+    # Check if the input is a valid number from 1 to 6
+    if human_roll.isdigit() and min_val <= int(human_roll) <= max_val:
+        human_roll = int(human_roll)
+        print("Your Roll: ", human_roll)
+        
+        # Compare the computer's roll and the human's roll
+        if computer_roll > human_roll:
+            print("Computer wins!")
+        elif computer_roll < human_roll:
+            print("You win!")
+        else:
+            print("It's a tie!")
+    else:
+        print("Invalid input. Please enter a number between 1 and 6.")
     
-    #asking user to roll the dice again. Any input other than yes or y will terminate the loop
-    roll_again = input("Roll the Dices Again?") 
+    roll_again = input("Roll the Dices Again? (yes/no): ")
